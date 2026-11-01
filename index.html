@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Монетка — сайт о финансовой грамотности для подростков: тесты, личный кошелёк, учёт трат, накопления, финансовый детектив и подбор подработки.">
+<meta name="keywords" content="финансовая грамотность, подросткам, тесты по финансовой грамотности, карманные деньги, накопления, мошенники, подработка для подростков">
+<meta property="og:title" content="Монетка — финансовая грамотность для подростков">
+<meta property="og:description" content="Тесты, личный кошелёк, траты и накопления, финансовый детектив и подбор подработки.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#5B2DB0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23E8173A'/%3E%3Ctext x='50' y='68' font-size='54' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3E%E2%82%BD%3C/text%3E%3C/svg%3E">
+<title>Монетка — финансовая грамотность для подростков</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#E8173A; --mint:#7DD8D2; --teal:#1F8BA0; --violet:#5B2DB0;
+  --ink:#1b1530; --muted:#5d5873; --bg:#f6f4fb; --card:#fff; --line:#e6e1f2;
+  --mint-soft:#e3f6f4; --violet-soft:#ece5fa; --red-soft:#fde7eb; --teal-soft:#e0f0f4;
+  --radius:20px; --shadow:0 10px 30px -12px rgba(43,20,94,.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Manrope",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;font-size:16px;min-height:100vh}
+h1,h2,h3,.logo,.btn,.tab-num{font-family:"Unbounded","Manrope",sans-serif}
+h1{font-size:clamp(28px,6vw,52px);line-height:1.1;font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(22px,4vw,32px);line-height:1.2;font-weight:700;margin-bottom:12px}
+h3{font-size:18px;font-weight:700;margin-bottom:8px}
+p{color:var(--muted)}
+button,input,select{font:inherit;color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:16px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:var(--violet);text-decoration:none;flex-shrink:0}
+.logo-coin{width:36px;height:36px;border-radius:50%;background:var(--red);display:grid;place-items:center;color:#fff;font-size:18px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.15)}
+nav{display:flex;gap:6px;margin-left:auto}
+nav a{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:700;font-size:15px;transition:.2s}
+nav a:hover{background:var(--violet-soft)}
+nav a.active{background:var(--violet);color:#fff}
+nav a .ico{font-size:18px}
+.burger{display:none;margin-left:auto;background:var(--violet-soft);border:0;border-radius:12px;width:44px;height:44px;font-size:22px;cursor:pointer;color:var(--violet)}
+@media (max-width:1120px){
+  .burger{display:block}
+  nav{position:absolute;top:68px;left:0;right:0;background:#fff;flex-direction:column;padding:12px 20px 20px;gap:4px;border-bottom:1px solid var(--line);display:none;box-shadow:var(--shadow)}
+  nav.open{display:flex}
+  nav a{padding:14px 16px;font-size:17px}
+}
+
+/* views */
+.view{display:none;padding:36px 0 70px;animation:fade .35s ease}
+.view.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* hero */
+.hero{background:var(--violet);color:#fff;border-radius:32px;padding:clamp(28px,5vw,56px);position:relative;overflow:hidden;display:grid;grid-template-columns:1.3fr 1fr;gap:30px;align-items:center}
+.hero p{color:#e3dcf7;font-size:18px;margin:16px 0 26px;max-width:520px}
+.hero h1 span{color:var(--mint)}
+.hero-art{position:relative;height:260px}
+.blob{position:absolute;border-radius:50%}
+.b1{width:200px;height:200px;background:var(--red);right:20px;top:10px}
+.b2{width:140px;height:140px;background:var(--mint);right:150px;top:110px}
+.b3{width:90px;height:90px;background:var(--teal);right:0;top:170px}
+.coin-big{position:absolute;right:60px;top:50px;font-size:110px;line-height:1;filter:drop-shadow(0 10px 10px rgba(0,0,0,.25))}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.hero-art{height:170px}.b1{width:140px;height:140px}.b2{width:100px;height:100px;right:120px;top:60px}.b3{top:100px}.coin-big{font-size:80px;top:30px}}
+
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:14px 22px;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;transition:transform .15s, box-shadow .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:none}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 8px 20px -8px var(--red)}
+.btn-violet{background:var(--violet);color:#fff}
+.btn-teal{background:var(--teal);color:#fff}
+.btn-ghost{background:transparent;border:2px solid currentColor}
+.btn-light{background:#fff;color:var(--violet)}
+.btn-sm{padding:9px 14px;font-size:12px}
+
+.grid{display:grid;gap:18px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g5{grid-template-columns:repeat(3,1fr)}
+@media (max-width:900px){.g5{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.g5{grid-template-columns:1fr}}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media (max-width:900px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr}}
+@media (max-width:640px){.g4,.g2{grid-template-columns:1fr}}
+
+.card{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.section{margin-top:44px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.eyebrow{display:inline-block;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+
+.tile{border-radius:var(--radius);padding:24px;color:#fff;text-decoration:none;display:flex;flex-direction:column;gap:10px;min-height:200px;transition:transform .2s}
+.tile:hover{transform:translateY(-4px) rotate(-.5deg)}
+.tile p{color:inherit;opacity:.9;font-size:15px}
+.tile .tile-ico{font-size:34px}
+.tile .go{margin-top:auto;font-weight:800;font-size:14px}
+.t-red{background:var(--red)} .t-mint{background:var(--mint);color:var(--ink)} .t-teal{background:var(--teal)} .t-violet{background:#3f1e85}
+
+.fact{display:flex;gap:14px;align-items:flex-start}
+.fact-num{flex-shrink:0;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-family:Unbounded;font-weight:800;color:#fff}
+
+.page-head{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;margin-bottom:28px}
+.page-ico{width:72px;height:72px;border-radius:22px;display:grid;place-items:center;font-size:36px}
+.page-head p{max-width:640px}
+@media (max-width:560px){.page-head{grid-template-columns:1fr}}
+
+/* quizzes */
+.quiz-card{display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:.2s;border:2px solid transparent}
+.quiz-card:hover{border-color:var(--mint)}
+.quiz-card .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.chip{display:inline-block;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;background:var(--violet-soft);color:var(--violet)}
+.chip.ok{background:var(--mint-soft);color:#0f6a62}
+.quiz-box{max-width:720px;margin:0 auto}
+.progress{height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--mint));border-radius:99px;transition:width .4s}
+.q-title{font-family:Unbounded;font-size:clamp(18px,3vw,22px);font-weight:700;margin:20px 0 18px;line-height:1.35}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:10px;cursor:pointer;font-weight:600;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--violet);background:var(--violet-soft)}
+.opt.right{border-color:var(--teal);background:var(--mint-soft)}
+.opt.wrong{border-color:var(--red);background:var(--red-soft)}
+.opt:disabled{cursor:default}
+.explain{border-radius:16px;padding:16px 18px;margin:8px 0 18px;background:var(--teal-soft);color:var(--ink);font-size:15px;display:none}
+.explain.show{display:block}
+.result{text-align:center}
+.score-ring{width:160px;height:160px;border-radius:50%;margin:10px auto 20px;display:grid;place-items:center;font-family:Unbounded;font-weight:800;font-size:38px;color:var(--violet)}
+
+/* wallet */
+.balance{background:linear-gradient(135deg,var(--teal),#14657a);color:#fff;border-radius:28px;padding:28px;position:relative;overflow:hidden}
+.balance::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:var(--mint);opacity:.25;right:-60px;top:-80px}
+.balance .label{opacity:.85;font-weight:600}
+.balance .amount{font-family:Unbounded;font-weight:800;font-size:clamp(34px,7vw,52px);margin:6px 0 18px}
+.balance .row{display:flex;gap:26px;flex-wrap:wrap}
+.balance .row b{display:block;font-family:Unbounded;font-size:18px}
+.balance .row span{opacity:.85;font-size:14px}
+form.add{display:grid;gap:12px}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--bg);border-radius:14px;padding:4px}
+.seg button{border:0;background:transparent;padding:10px;border-radius:10px;font-weight:700;cursor:pointer}
+.seg button.on{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.seg button.on[data-type="income"]{color:var(--teal)}
+.seg button.on[data-type="expense"]{color:var(--red)}
+label.f{display:grid;gap:6px;font-weight:700;font-size:14px}
+.inp{width:100%;border:2px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;outline:none;transition:.15s}
+.inp:focus{border-color:var(--violet)}
+.ops{list-style:none;display:grid;gap:8px;max-height:460px;overflow:auto}
+.op{display:grid;grid-template-columns:42px 1fr auto auto;gap:12px;align-items:center;padding:10px 12px;border-radius:14px;background:var(--bg)}
+.op .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:#fff}
+.op .t{font-weight:700;line-height:1.25}
+.op .d{font-size:12px;color:var(--muted)}
+.op .s{font-weight:800;font-family:Unbounded;font-size:14px;white-space:nowrap}
+.op .s.plus{color:var(--teal)} .op .s.minus{color:var(--red)}
+.x{border:0;background:transparent;cursor:pointer;color:var(--muted);font-size:18px;width:30px;height:30px;border-radius:8px}
+.x:hover{background:var(--red-soft);color:var(--red)}
+.empty{text-align:center;padding:30px 10px;color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(100px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;font-weight:600;transition:.3s;z-index:50;display:flex;gap:12px;align-items:center;opacity:0;visibility:hidden}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
+.toast button{background:var(--mint);border:0;border-radius:999px;padding:5px 12px;font-weight:800;cursor:pointer;color:var(--ink)}
+
+/* spending */
+.bars{display:grid;gap:12px}
+.bar-row{display:grid;grid-template-columns:130px 1fr 90px;gap:12px;align-items:center;font-size:14px;font-weight:600}
+.bar-track{height:14px;background:var(--bg);border-radius:99px;overflow:hidden}
+.bar-track i{display:block;height:100%;border-radius:99px;transition:width .5s}
+.bar-row .v{text-align:right;font-weight:800}
+@media (max-width:520px){.bar-row{grid-template-columns:100px 1fr 74px;font-size:13px}}
+.split{display:flex;height:46px;border-radius:14px;overflow:hidden;font-weight:800;font-size:13px;color:#fff}
+.split div{display:grid;place-items:center;transition:flex .4s;min-width:0;overflow:hidden;white-space:nowrap}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:14px;font-weight:600}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:6px;vertical-align:-1px}
+.tip{border-left:6px solid var(--mint);padding:4px 0 4px 16px}
+.tip h3{margin-bottom:4px}
+.calc-out{background:var(--red-soft);border-radius:16px;padding:18px;margin-top:6px}
+.calc-out b{font-family:Unbounded;color:var(--red);font-size:24px;display:block}
+.nw{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.game-item{font-family:Unbounded;font-size:18px;font-weight:700;text-align:center;padding:24px 10px;background:var(--bg);border-radius:16px;margin:14px 0}
+
+/* savings */
+.goal{display:grid;gap:10px}
+.goal-top{display:flex;justify-content:space-between;align-items:start;gap:10px}
+.goal-emoji{font-size:30px}
+.goal .progress{height:14px}
+.goal .progress > i{background:linear-gradient(90deg,var(--violet),#8b5cf6)}
+.goal-nums{display:flex;justify-content:space-between;font-size:14px;font-weight:700}
+.goal-actions{display:flex;gap:8px;flex-wrap:wrap}
+.goal-actions .inp{flex:1;min-width:110px;padding:9px 12px}
+.done-badge{background:var(--mint);color:var(--ink);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800}
+.rule{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.rule div{border-radius:16px;padding:16px;color:#fff;text-align:center}
+.rule b{font-family:Unbounded;font-size:26px;display:block}
+.rule span{font-size:13px;font-weight:600}
+@media (max-width:520px){.rule b{font-size:20px}}
+
+/* detective */
+.case-card{display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:.2s;border:2px solid transparent;position:relative;overflow:hidden}
+.case-card:hover{border-color:var(--violet);transform:translateY(-3px)}
+.case-no{font-family:Unbounded;font-weight:800;font-size:12px;color:var(--muted);letter-spacing:.08em}
+.stamp{position:absolute;right:14px;top:14px;transform:rotate(8deg);border:3px solid var(--teal);color:var(--teal);font-family:Unbounded;font-weight:800;font-size:11px;padding:4px 8px;border-radius:8px;letter-spacing:.06em}
+.dossier{background:#fffaf0;border:1px solid #efe3c8;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);position:relative}
+.dossier::before{content:"СЕКРЕТНО";position:absolute;right:20px;top:18px;font-family:Unbounded;font-weight:800;font-size:12px;color:var(--red);border:2px solid var(--red);padding:3px 8px;border-radius:6px;transform:rotate(6deg);opacity:.8}
+.dossier p{color:var(--ink);font-size:16px}
+.dossier .case-no{display:block;padding-right:120px}
+.clues{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:14px}
+.clue{border:2px dashed var(--violet);background:var(--violet-soft);border-radius:16px;padding:16px;cursor:pointer;text-align:left;min-height:120px;transition:.2s;display:flex;flex-direction:column;gap:6px}
+.clue:hover{transform:rotate(-1deg) scale(1.02)}
+.clue .ci{font-size:26px}
+.clue b{font-family:Unbounded;font-size:14px}
+.clue.open{border-style:solid;border-color:var(--line);background:#fff;cursor:default;transform:none}
+.clue.open small{color:var(--ink);font-size:14px;line-height:1.45}
+.clue:not(.open) small{color:var(--violet);font-weight:700}
+.steps{display:flex;gap:8px;margin:18px 0 6px;flex-wrap:wrap}
+.steps span{padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;background:var(--line);color:var(--muted)}
+.steps span.on{background:var(--violet);color:#fff}
+.steps span.done{background:var(--mint);color:var(--ink)}
+.lesson{list-style:none;display:grid;gap:8px;margin-top:12px}
+.lesson li{background:var(--mint-soft);border-radius:12px;padding:10px 14px;font-weight:600}
+.lesson li::before{content:"✓ ";color:var(--teal);font-weight:800}
+
+.job{display:grid;gap:10px}
+.job-e{font-size:34px;width:60px;height:60px;border-radius:18px;background:var(--mint-soft);display:grid;place-items:center;flex-shrink:0}
+.job-row{display:grid;gap:2px;font-size:14px;border-top:1px solid var(--line);padding-top:8px}
+.job-row span{color:var(--muted);font-weight:600}
+
+footer{background:var(--ink);color:#cfc9e4;padding:36px 0;font-size:14px}
+footer p{color:#a49fbb}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.muted{color:var(--muted)}
+.mt{margin-top:16px}
+.small{font-size:13px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a href="#home" class="logo"><span class="logo-coin">₽</span>Монетка</a>
+    <button class="burger" id="burger" aria-label="Меню">☰</button>
+    <nav id="nav">
+      <a href="#tests" data-v="tests"><span class="ico">🧠</span>Тесты</a>
+      <a href="#wallet" data-v="wallet"><span class="ico">👛</span>Личный кошелёк</a>
+      <a href="#spending" data-v="spending"><span class="ico">🛍️</span>Траты</a>
+      <a href="#savings" data-v="savings"><span class="ico">🐷</span>Накопления</a>
+      <a href="#detective" data-v="detective"><span class="ico">🕵️</span>Детектив</a>
+      <a href="#career" data-v="career"><span class="ico">🧭</span>Карьера</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- HOME -->
+<section class="view" id="v-home">
+  <div class="hero">
+    <div>
+      <span class="eyebrow" style="color:var(--mint)">Финансовая грамотность для подростков</span>
+      <h1>Деньги — это <span>просто</span>, если знать правила</h1>
+      <p>Учись считать, тратить с умом и копить на мечту. Проходи тесты, веди свой кошелёк и ставь цели — всё в одном месте.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="#tests" class="btn btn-red">Пройти тест →</a>
+        <a href="#wallet" class="btn btn-light">Открыть кошелёк</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+      <div class="coin-big">🪙</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div><span class="eyebrow">С чего начать</span><h2>Шесть шагов к своим деньгам</h2></div></div>
+    <div class="grid g5">
+      <a href="#tests" class="tile t-violet"><span class="tile-ico">🧠</span><h3>Тесты</h3><p>Проверь, что ты уже знаешь о деньгах, банках и мошенниках.</p><span class="go">Начать →</span></a>
+      <a href="#wallet" class="tile t-teal"><span class="tile-ico">👛</span><h3>Личный кошелёк</h3><p>Записывай доходы и расходы и всегда знай свой баланс.</p><span class="go">Открыть →</span></a>
+      <a href="#spending" class="tile t-red"><span class="tile-ico">🛍️</span><h3>Траты</h3><p>Смотри, куда уходят деньги, и учись отличать «нужно» от «хочу».</p><span class="go">Разобраться →</span></a>
+      <a href="#savings" class="tile t-mint"><span class="tile-ico">🐷</span><h3>Накопления</h3><p>Поставь цель и следи, как растёт копилка.</p><span class="go">Копить →</span></a>
+      <a href="#detective" class="tile" style="background:var(--ink)"><span class="tile-ico">🕵️</span><h3>Финансовый детектив</h3><p>Расследуй дела о мошенниках и неудачных вложениях.</p><span class="go">Взять дело →</span></a>
+      <a href="#career" class="tile" style="background:linear-gradient(135deg,var(--teal),var(--violet))"><span class="tile-ico">🧭</span><h3>Карьера</h3><p>Ответь на вопросы и узнай, какая подработка подойдёт именно тебе.</p><span class="go">Подобрать →</span></a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div><span class="eyebrow">Главное за минуту</span><h2>Пять правил умных денег</h2></div></div>
+    <div class="grid g2">
+      <div class="card fact"><div class="fact-num" style="background:var(--red)">1</div><div><h3>Сначала заплати себе</h3><p>Получил деньги — сразу отложи хотя бы 10%. Потом трать остальное.</p></div></div>
+      <div class="card fact"><div class="fact-num" style="background:var(--teal)">2</div><div><h3>Считай, а не угадывай</h3><p>Записывай траты хотя бы месяц — и увидишь, куда «утекают» деньги.</p></div></div>
+      <div class="card fact"><div class="fact-num" style="background:var(--violet)">3</div><div><h3>Правило 24 часов</h3><p>Хочешь что-то дорогое? Подожди сутки. Если желание осталось — покупай.</p></div></div>
+      <div class="card fact"><div class="fact-num" style="background:var(--mint);color:var(--ink)">4</div><div><h3>Код из СМС — только твой</h3><p>Никогда никому не сообщай коды, ПИН и CVC, даже «сотруднику банка».</p></div></div>
+      <div class="card fact"><div class="fact-num" style="background:#3f1e85">5</div><div><h3>Маленькие суммы — большие деньги</h3><p>150 ₽ в день на перекусы — это почти 55 000 ₽ в год.</p></div></div>
+      <div class="card fact" style="background:var(--violet-soft)"><div class="fact-num" style="background:var(--red)">?</div><div><h3>Проверь себя</h3><p>Насколько ты финансово грамотный? <a href="#tests" style="color:var(--violet);font-weight:800">Пройди тест</a></p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTS -->
+<section class="view" id="v-tests">
+  <div id="quiz-list">
+    <div class="page-head">
+      <div class="page-ico" style="background:var(--violet-soft)">🧠</div>
+      <div><span class="eyebrow">Тесты по финансовой грамотности</span><h2>Проверь свои знания</h2><p>Выбери тему. После каждого ответа — короткое объяснение, а в конце — твой результат.</p></div>
+    </div>
+    <div class="grid g3" id="quiz-cards"></div>
+  </div>
+  <div id="quiz-run" class="quiz-box" hidden></div>
+</section>
+
+<!-- WALLET -->
+<section class="view" id="v-wallet">
+  <div class="page-head">
+    <div class="page-ico" style="background:var(--teal-soft)">👛</div>
+    <div><span class="eyebrow">Личный кошелёк</span><h2>Сколько у меня денег?</h2><p>Добавляй доходы (карманные, подарки, подработка) и расходы. Данные хранятся только в твоём браузере.</p></div>
+  </div>
+  <div class="grid g2" style="align-items:start">
+    <div class="grid">
+      <div class="balance">
+        <div class="label">Баланс кошелька</div>
+        <div class="amount" id="w-balance">0 ₽</div>
+        <div class="row">
+          <div><span>Доходы</span><b id="w-in">0 ₽</b></div>
+          <div><span>Расходы</span><b id="w-out">0 ₽</b></div>
+          <div><span>В копилках</span><b id="w-saved">0 ₽</b></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Новая запись</h3>
+        <form class="add mt" id="op-form">
+          <div class="seg" id="op-type">
+            <button type="button" data-type="expense" class="on">− Расход</button>
+            <button type="button" data-type="income">+ Доход</button>
+          </div>
+          <label class="f">Сумма, ₽<input class="inp" id="op-sum" type="number" inputmode="decimal" min="1" step="1" placeholder="Например, 350" required></label>
+          <label class="f">Категория<select class="inp" id="op-cat"></select></label>
+          <label class="f">Комментарий<input class="inp" id="op-note" maxlength="40" placeholder="Например, шаурма с друзьями"></label>
+          <button class="btn btn-violet" type="submit">Добавить</button>
+        </form>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-head" style="margin-bottom:12px"><h3 style="margin:0">История</h3><button class="btn btn-sm btn-ghost" id="demo-btn" style="color:var(--teal)">Заполнить примером</button></div>
+      <ul class="ops" id="ops"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- SPENDING -->
+<section class="view" id="v-spending">
+  <div class="page-head">
+    <div class="page-ico" style="background:var(--red-soft)">🛍️</div>
+    <div><span class="eyebrow">Траты</span><h2>Куда уходят деньги</h2><p>Анализ твоих расходов из кошелька, полезные правила и пара тренажёров.</p></div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>Расходы по категориям</h3>
+      <p class="small" id="sp-total">Пока нет расходов.</p>
+      <div class="bars mt" id="sp-bars"></div>
+    </div>
+    <div class="card">
+      <h3>«Нужно» и «хочу»</h3>
+      <p class="small">Нужды — еда, транспорт, учёба, связь. Желания — всё остальное.</p>
+      <div class="split mt" id="sp-split"><div style="flex:1;background:var(--line);color:var(--muted)">Нет данных</div></div>
+      <div class="legend"><span><i style="background:var(--teal)"></i>Нужно</span><span><i style="background:var(--red)"></i>Хочу</span></div>
+      <p class="small mt" id="sp-advice"></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div><span class="eyebrow">Тренажёр</span><h2>Нужно или хочу?</h2></div></div>
+    <div class="card" style="max-width:640px">
+      <p>Реши, к чему относится покупка. Правильных ответов не всегда один — главное, научиться задавать себе этот вопрос.</p>
+      <div class="game-item" id="nw-item">—</div>
+      <div class="nw" style="justify-content:center">
+        <button class="btn btn-teal" data-nw="need">Нужно</button>
+        <button class="btn btn-red" data-nw="want">Хочу</button>
+      </div>
+      <p class="small" id="nw-msg" style="text-align:center;min-height:44px"></p>
+      <p class="small" style="text-align:center"><b id="nw-score">0</b> из <b id="nw-count">0</b> совпало с подсказкой</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div><span class="eyebrow">Калькулятор привычки</span><h2>Сколько стоит «мелочь»?</h2></div></div>
+    <div class="grid g2">
+      <div class="card">
+        <form class="add" id="habit" onsubmit="return false">
+          <label class="f">Что покупаешь<input class="inp" id="h-name" value="Кофе / лимонад"></label>
+          <label class="f">Цена, ₽<input class="inp" id="h-price" type="number" min="0" value="150"></label>
+          <label class="f">Сколько раз в неделю<input class="inp" id="h-times" type="range" min="1" max="7" value="5"><span class="small muted"><b id="h-times-v">5</b> раз(а)</span></label>
+        </form>
+      </div>
+      <div class="card">
+        <div class="calc-out"><span class="small">За месяц</span><b id="h-month">0 ₽</b></div>
+        <div class="calc-out mt" style="background:var(--violet-soft)"><span class="small">За год</span><b id="h-year" style="color:var(--violet)">0 ₽</b></div>
+        <p class="small mt" id="h-eq"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div><span class="eyebrow">Лайфхаки</span><h2>Как тратить с умом</h2></div></div>
+    <div class="grid g3">
+      <div class="card tip"><h3>Список перед магазином</h3><p>Пиши список заранее и не бери ничего сверх него. Так меньше спонтанных покупок.</p></div>
+      <div class="card tip" style="border-color:var(--red)"><h3>«Скидка» ≠ выгода</h3><p>Если вещь не была нужна, покупка со скидкой 50% — это всё равно минус 50% денег.</p></div>
+      <div class="card tip" style="border-color:var(--violet)"><h3>Считай в часах</h3><p>Подрабатываешь за 300 ₽/час? Кроссовки за 9 000 ₽ — это 30 часов работы. Стоят они того?</p></div>
+      <div class="card tip" style="border-color:var(--teal)"><h3>Подписки</h3><p>Проверь, за какие подписки списываются деньги. Отключи те, которыми не пользуешься.</p></div>
+      <div class="card tip"><h3>Сравнивай цены</h3><p>Одна и та же вещь в разных магазинах может стоить по-разному. Смотри цену за штуку или за килограмм.</p></div>
+      <div class="card tip" style="border-color:var(--red)"><h3>Осторожно, «рассрочка»</h3><p>Платить частями удобно, но легко набрать много платежей и забыть о них.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DETECTIVE -->
+<section class="view" id="v-detective">
+  <div id="case-list">
+    <div class="page-head">
+      <div class="page-ico" style="background:var(--ink)">🕵️</div>
+      <div><span class="eyebrow">Финансовый детектив</span><h2>Расследуй дело</h2><p>Изучи историю, открой улики и выясни, что пошло не так. Потом предложи, как исправить ситуацию. Каждое дело тренирует критическое мышление.</p></div>
+    </div>
+    <div class="section-head" style="margin-bottom:12px"><span></span><span class="chip" id="case-count">Раскрыто: 0</span></div>
+    <div class="grid g3" id="case-cards"></div>
+  </div>
+  <div id="case-run" class="quiz-box" style="max-width:820px" hidden></div>
+</section>
+
+<!-- CAREER -->
+<section class="view" id="v-career">
+  <div class="page-head">
+    <div class="page-ico" style="background:var(--mint-soft)">🧭</div>
+    <div><span class="eyebrow">Карьера</span><h2>Твоя первая подработка</h2><p>Пройди короткую анкету и узнай, какие подработки подходят тебе по возрасту, интересам и свободному времени.</p></div>
+  </div>
+  <div id="career-box" class="quiz-box" style="max-width:860px"></div>
+</section>
+
+<!-- SAVINGS -->
+<section class="view" id="v-savings">
+  <div class="page-head">
+    <div class="page-ico" style="background:var(--mint-soft)">🐷</div>
+    <div><span class="eyebrow">Накопления</span><h2>Копим на мечту</h2><p>Создай цель, пополняй копилку из кошелька и смотри, сколько осталось.</p></div>
+  </div>
+
+  <div class="grid g2" style="align-items:start">
+    <div class="card">
+      <h3>Новая цель</h3>
+      <form class="add mt" id="goal-form">
+        <label class="f">На что копим<input class="inp" id="g-name" maxlength="30" placeholder="Например, наушники" required></label>
+        <label class="f">Сколько нужно, ₽<input class="inp" id="g-target" type="number" min="1" placeholder="8000" required></label>
+        <label class="f">Иконка<select class="inp" id="g-emoji"><option>🎧</option><option>📱</option><option>👟</option><option>🎮</option><option>🚲</option><option>✈️</option><option>🎁</option><option>💻</option></select></label>
+        <button class="btn btn-violet" type="submit">Создать цель</button>
+      </form>
+    </div>
+    <div class="card">
+      <h3>Калькулятор цели</h3>
+      <p class="small">Сколько времени займёт накопление?</p>
+      <form class="add mt" onsubmit="return false">
+        <label class="f">Стоимость цели, ₽<input class="inp" id="c-target" type="number" min="0" value="12000"></label>
+        <label class="f">Откладываю в неделю, ₽<input class="inp" id="c-week" type="number" min="0" value="500"></label>
+      </form>
+      <div class="calc-out mt" style="background:var(--mint-soft)"><span class="small">Понадобится</span><b id="c-out" style="color:var(--teal)">—</b></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div><span class="eyebrow">Мои копилки</span><h2>Цели</h2></div><span class="chip" id="g-total">Накоплено: 0 ₽</span></div>
+    <div class="grid g3" id="goals"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div><span class="eyebrow">Правило 50 / 30 / 20</span><h2>Как делить деньги</h2></div></div>
+    <div class="card">
+      <p>Введи, сколько денег у тебя появляется в месяц, — и увидишь простой план.</p>
+      <label class="f mt" style="max-width:280px">Доход в месяц, ₽<input class="inp" id="r-in" type="number" min="0" value="5000"></label>
+      <div class="rule">
+        <div style="background:var(--teal)"><b id="r-50">2 500 ₽</b><span>50% — нужное</span></div>
+        <div style="background:var(--red)"><b id="r-30">1 500 ₽</b><span>30% — желания</span></div>
+        <div style="background:var(--violet)"><b id="r-20">1 000 ₽</b><span>20% — в копилку</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="grid g3">
+      <div class="card tip"><h3>Подушка безопасности</h3><p>Деньги «на всякий случай»: сломался телефон, потерял проездной. Начни хотя бы с 1 000 ₽.</p></div>
+      <div class="card tip" style="border-color:var(--violet)"><h3>Вклад и проценты</h3><p>Банк платит проценты за деньги на вкладе или накопительном счёте. С 14 лет можно открыть свою карту с согласия родителей.</p></div>
+      <div class="card tip" style="border-color:var(--red)"><h3>Слишком хорошо, чтобы быть правдой</h3><p>«Удвоим деньги за неделю» — это почти всегда мошенничество или финансовая пирамида.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div><div class="logo" style="color:#fff"><span class="logo-coin">₽</span>Монетка</div><p class="mt">Сайт о финансовой грамотности для подростков.</p></div>
+    <p>Данные кошелька и целей хранятся только в этом браузере.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><span id="toast-t"></span><button id="toast-undo" hidden>Отменить</button></div>
+
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const fmt = n => Math.round(n).toLocaleString('ru-RU') + ' ₽';
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ---------- storage ---------- */
+const KEY = 'monetka-v1';
+let state = {ops:[], goals:[], quiz:{}};
+try { const s = JSON.parse(localStorage.getItem(KEY)); if (s) state = Object.assign(state, s); } catch(e){}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} };
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+
+/* ---------- toast ---------- */
+let toastTimer, undoFn;
+function toast(text, undo){
+  $('#toast-t').textContent = text;
+  undoFn = undo; $('#toast-undo').hidden = !undo;
+  $('#toast').classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => $('#toast').classList.remove('show'), 4000);
+}
+$('#toast-undo').onclick = () => { if (undoFn) undoFn(); $('#toast').classList.remove('show'); };
+
+/* ---------- routing ---------- */
+const views = ['home','tests','wallet','spending','savings','detective','career'];
+function route(){
+  let v = location.hash.slice(1); if (!views.includes(v)) v = 'home';
+  $$('.view').forEach(el => el.classList.toggle('active', el.id === 'v-' + v));
+  $$('nav a').forEach(a => a.classList.toggle('active', a.dataset.v === v));
+  $('#nav').classList.remove('open');
+  if (v === 'spending') renderSpending();
+  if (v === 'tests') showQuizList();
+  if (v === 'detective') showCases();
+  if (v === 'career') showCareerIntro();
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', route);
+$('#burger').onclick = () => $('#nav').classList.toggle('open');
+
+/* ---------- categories ---------- */
+const CATS = {
+  expense: [
+    ['food','Еда и перекусы','🍔',true], ['transport','Транспорт','🚌',true], ['study','Учёба','📚',true],
+    ['phone','Связь и интернет','📶',true], ['fun','Развлечения','🎬',false], ['clothes','Одежда','👕',false],
+    ['games','Игры и подписки','🎮',false], ['gifts','Подарки','🎁',false], ['other','Другое','✨',false]
+  ],
+  income: [
+    ['pocket','Карманные','💰'], ['gift','Подарок','🎉'], ['job','Подработка','💼'], ['sell','Продал вещь','🏷️'], ['other_in','Другое','✨']
+  ],
+  saving: [['save','В копилку','🐷']]
+};
+const catInfo = id => [...CATS.expense, ...CATS.income, ...CATS.saving].find(c => c[0] === id) || ['other','Другое','✨'];
+
+/* ---------- wallet ---------- */
+let opType = 'expense';
+function fillCats(){
+  $('#op-cat').innerHTML = CATS[opType].map(c => `<option value="${c[0]}">${c[2]} ${c[1]}</option>`).join('');
+}
+$$('#op-type button').forEach(b => b.onclick = () => {
+  opType = b.dataset.type;
+  $$('#op-type button').forEach(x => x.classList.toggle('on', x === b));
+  fillCats();
+});
+fillCats();
+
+function totals(){
+  let inc = 0, out = 0, saved = 0;
+  state.ops.forEach(o => { if (o.type === 'income') inc += o.sum; else if (o.type === 'expense') out += o.sum; else if (o.type === 'saving') saved += o.sum; });
+  return {inc, out, saved, balance: inc - out - saved};
+}
+
+$('#op-form').onsubmit = e => {
+  e.preventDefault();
+  const sum = Math.round(parseFloat($('#op-sum').value));
+  if (!(sum > 0)) return;
+  const t = totals();
+  if (opType === 'expense' && sum > t.balance) toast('Внимание: расход больше баланса — ты уходишь в минус');
+  state.ops.unshift({id: uid(), type: opType, sum, cat: $('#op-cat').value, note: $('#op-note').value.trim(), date: Date.now()});
+  save(); renderWallet();
+  $('#op-sum').value = ''; $('#op-note').value = '';
+  if (!(opType === 'expense' && sum > t.balance)) toast(opType === 'income' ? 'Доход добавлен' : 'Расход записан');
+};
+
+function renderWallet(){
+  const t = totals();
+  $('#w-balance').textContent = fmt(t.balance);
+  $('#w-in').textContent = fmt(t.inc);
+  $('#w-out').textContent = fmt(t.out);
+  $('#w-saved').textContent = fmt(t.saved);
+  const ul = $('#ops');
+  if (!state.ops.length){ ul.innerHTML = '<li class="empty">Здесь появятся твои доходы и расходы.<br>Добавь первую запись или нажми «Заполнить примером».</li>'; return; }
+  ul.innerHTML = state.ops.map(o => {
+    const c = catInfo(o.cat);
+    const plus = o.type === 'income' || (o.type === 'saving' && o.sum < 0);
+    const d = new Date(o.date).toLocaleDateString('ru-RU',{day:'numeric',month:'short'});
+    return `<li class="op"><span class="ic">${c[2]}</span><div><div class="t">${esc(o.note || c[1])}</div><div class="d">${c[1]} · ${d}</div></div><span class="s ${plus?'plus':'minus'}">${plus?'+':'−'}${fmt(Math.abs(o.sum))}</span><button class="x" data-del="${o.id}" aria-label="Удалить">×</button></li>`;
+  }).join('');
+}
+$('#ops').onclick = e => {
+  const id = e.target.dataset.del; if (!id) return;
+  const idx = state.ops.findIndex(o => o.id === id); if (idx < 0) return;
+  const [removed] = state.ops.splice(idx,1);
+  save(); renderWallet(); renderGoals();
+  toast('Запись удалена', () => { state.ops.splice(idx,0,removed); save(); renderWallet(); renderGoals(); });
+};
+$('#demo-btn').onclick = () => {
+  const day = 864e5, now = Date.now();
+  const demo = [
+    ['income',2000,'pocket','Карманные на неделю',6],['expense',350,'food','Шаурма с друзьями',5],['expense',120,'transport','Проезд',5],
+    ['expense',299,'games','Подписка на музыку',4],['income',1500,'gift','Бабушка подарила',3],['expense',450,'fun','Кино',3],
+    ['expense',180,'food','Перекус в школе',2],['expense',250,'study','Тетради и ручки',1],['expense',600,'clothes','Футболка',1],['income',800,'job','Выгулял соседскую собаку',0]
+  ];
+  demo.forEach(d => state.ops.push({id:uid(), type:d[0], sum:d[1], cat:d[2], note:d[3], date: now - d[4]*day}));
+  state.ops.sort((a,b) => b.date - a.date);
+  save(); renderWallet(); toast('Добавлены примеры записей');
+};
+
+/* ---------- spending ---------- */
+const PALETTE = ['#5B2DB0','#E8173A','#1F8BA0','#7DD8D2','#8b5cf6','#f0627a','#3fb5c9','#b4ebe7','#2b1460'];
+function renderSpending(){
+  const exp = state.ops.filter(o => o.type === 'expense');
+  const total = exp.reduce((s,o) => s + o.sum, 0);
+  if (!total){
+    $('#sp-total').innerHTML = 'Пока нет расходов. Добавь их в <a href="#wallet" style="color:var(--violet);font-weight:800">кошельке</a>.';
+    $('#sp-bars').innerHTML = '';
+    $('#sp-split').innerHTML = '<div style="flex:1;background:var(--line);color:var(--muted)">Нет данных</div>';
+    $('#sp-advice').textContent = '';
+    return;
+  }
+  $('#sp-total').innerHTML = `Всего потрачено: <b style="color:var(--ink)">${fmt(total)}</b>`;
+  const by = {};
+  exp.forEach(o => by[o.cat] = (by[o.cat]||0) + o.sum);
+  const rows = Object.entries(by).sort((a,b) => b[1]-a[1]);
+  const max = rows[0][1];
+  $('#sp-bars').innerHTML = rows.map(([k,v],i) => {
+    const c = catInfo(k);
+    return `<div class="bar-row"><span>${c[2]} ${c[1]}</span><div class="bar-track"><i style="width:${v/max*100}%;background:${PALETTE[i%PALETTE.length]}"></i></div><span class="v">${fmt(v)}</span></div>`;
+  }).join('');
+  let need = 0;
+  exp.forEach(o => { const c = CATS.expense.find(x => x[0] === o.cat); if (c && c[3]) need += o.sum; });
+  const want = total - need, np = Math.round(need/total*100), wp = 100 - np;
+  $('#sp-split').innerHTML = `<div style="flex:${need||0.0001};background:var(--teal)">${np>12?np+'%':''}</div><div style="flex:${want||0.0001};background:var(--red)">${wp>12?wp+'%':''}</div>`;
+  $('#sp-advice').textContent = wp > 50
+    ? `На желания уходит ${wp}% трат. Попробуй правило 24 часов перед следующей покупкой «для себя».`
+    : `Отлично! Большая часть денег (${np}%) уходит на нужное. Не забывай откладывать в копилку.`;
+}
+
+/* need/want game */
+const NW = [
+  ['Проездной на месяц','need','Без него не добраться до школы — это нужда.'],
+  ['Новый скин в игре','want','Игра работает и без него — это желание.'],
+  ['Учебник по алгебре','need','Нужен для учёбы.'],
+  ['Пятая худи в шкафу','want','Одежда нужна, но пятая худи — уже желание.'],
+  ['Обед в школьной столовой','need','Еда — базовая потребность.'],
+  ['Энергетик каждый день','want','Не нужен и ещё вреден для здоровья.'],
+  ['Зимние ботинки вместо порвавшихся','need','Без тёплой обуви зимой никак.'],
+  ['Новый телефон, когда старый работает','want','Если старый справляется — это желание.'],
+  ['Оплата мобильной связи','need','Связь с родителями и для учёбы — нужда.'],
+  ['Билет на концерт любимой группы','want','Классное желание! Его стоит запланировать и накопить.'],
+  ['Подписка на третий стриминг','want','Сколькими подписками ты реально пользуешься?'],
+  ['Лекарство от простуды','need','Здоровье — в приоритете.']
+];
+let nwOrder = [], nwI = 0, nwScore = 0, nwCount = 0;
+function nwNext(){
+  if (!nwOrder.length || nwI >= nwOrder.length){ nwOrder = NW.map((_,i)=>i).sort(()=>Math.random()-.5); nwI = 0; }
+  $('#nw-item').textContent = NW[nwOrder[nwI]][0];
+}
+$$('[data-nw]').forEach(b => b.onclick = () => {
+  const it = NW[nwOrder[nwI]];
+  const ok = b.dataset.nw === it[1];
+  nwCount++; if (ok) nwScore++;
+  $('#nw-msg').innerHTML = (ok ? '✅ ' : '🤔 Подсказка: ') + it[2];
+  $('#nw-score').textContent = nwScore; $('#nw-count').textContent = nwCount;
+  nwI++; nwNext();
+});
+nwNext();
+
+/* habit calc */
+const EQ = [[2500,'новые наушники'],[6000,'кроссовки'],[15000,'игровая консоль подешевле'],[30000,'новый смартфон'],[60000,'поездка на каникулах']];
+function habit(){
+  const p = +$('#h-price').value || 0, t = +$('#h-times').value;
+  $('#h-times-v').textContent = t;
+  const y = p * t * 52, m = y / 12;
+  $('#h-month').textContent = fmt(m); $('#h-year').textContent = fmt(y);
+  const eq = EQ.filter(e => e[0] <= y).pop();
+  $('#h-eq').textContent = eq ? `«${$('#h-name').value || 'Привычка'}» за год — это примерно ${eq[1]}. Если сократить вдвое, сэкономишь ${fmt(y/2)}.` : 'Небольшая сумма — но всё равно стоит её замечать.';
+}
+['#h-price','#h-times','#h-name'].forEach(s => $(s).addEventListener('input', habit)); habit();
+
+/* ---------- savings ---------- */
+$('#goal-form').onsubmit = e => {
+  e.preventDefault();
+  const target = Math.round(+$('#g-target').value);
+  const name = $('#g-name').value.trim();
+  if (!name || !(target > 0)) return;
+  state.goals.push({id:uid(), name, target, emoji: $('#g-emoji').value});
+  save(); renderGoals(); e.target.reset(); toast('Цель создана 🎯');
+};
+const goalSaved = id => state.ops.filter(o => o.type === 'saving' && o.goal === id).reduce((s,o)=>s+o.sum,0);
+function renderGoals(){
+  const box = $('#goals');
+  const total = state.ops.filter(o => o.type === 'saving').reduce((s,o)=>s+o.sum,0);
+  $('#g-total').textContent = 'Накоплено: ' + fmt(total);
+  if (!state.goals.length){ box.innerHTML = '<div class="card empty" style="grid-column:1/-1">Целей пока нет. Создай первую — например, «Наушники, 5 000 ₽».</div>'; return; }
+  box.innerHTML = state.goals.map(g => {
+    const s = goalSaved(g.id), pct = Math.min(100, s/g.target*100), left = Math.max(0, g.target - s);
+    return `<div class="card goal">
+      <div class="goal-top"><span class="goal-emoji">${g.emoji}</span>${s>=g.target?'<span class="done-badge">Цель достигнута 🎉</span>':''}<button class="x" data-gdel="${g.id}" aria-label="Удалить цель">×</button></div>
+      <h3 style="margin:0">${esc(g.name)}</h3>
+      <div class="progress"><i style="width:${pct}%"></i></div>
+      <div class="goal-nums"><span>${fmt(s)}</span><span class="muted">из ${fmt(g.target)}</span></div>
+      <p class="small">${left ? 'Осталось ' + fmt(left) : 'Можно покупать!'}</p>
+      <div class="goal-actions"><input class="inp" type="number" min="1" placeholder="Сумма" data-gin="${g.id}"><button class="btn btn-sm btn-violet" data-gadd="${g.id}">Отложить</button><button class="btn btn-sm btn-ghost" style="color:var(--teal)" data-gout="${g.id}">Забрать</button></div>
+    </div>`;
+  }).join('');
+}
+$('#goals').onclick = e => {
+  const d = e.target.dataset;
+  if (d.gdel){
+    const idx = state.goals.findIndex(g => g.id === d.gdel);
+    const [g] = state.goals.splice(idx,1);
+    const ops = state.ops.filter(o => o.goal === g.id);
+    state.ops = state.ops.filter(o => o.goal !== g.id);
+    save(); renderGoals(); renderWallet();
+    toast('Цель удалена, деньги вернулись в кошелёк', () => { state.goals.splice(idx,0,g); state.ops.push(...ops); state.ops.sort((a,b)=>b.date-a.date); save(); renderGoals(); renderWallet(); });
+    return;
+  }
+  const id = d.gadd || d.gout; if (!id) return;
+  const inp = document.querySelector(`[data-gin="${id}"]`);
+  const sum = Math.round(+inp.value);
+  if (!(sum > 0)){ inp.focus(); return; }
+  const g = state.goals.find(x => x.id === id);
+  if (d.gadd){
+    if (sum > totals().balance){ toast('В кошельке не хватает денег'); return; }
+    state.ops.unshift({id:uid(), type:'saving', sum, cat:'save', note:'В копилку: ' + g.name, goal:id, date:Date.now()});
+    toast('Отложено ' + fmt(sum) + ' 🐷');
+  } else {
+    const have = goalSaved(id);
+    if (sum > have){ toast('В копилке только ' + fmt(have)); return; }
+    state.ops.unshift({id:uid(), type:'saving', sum:-sum, cat:'save', note:'Из копилки: ' + g.name, goal:id, date:Date.now()});
+    toast('Возвращено в кошелёк ' + fmt(sum));
+  }
+  save(); renderGoals(); renderWallet();
+};
+
+function goalCalc(){
+  const t = +$('#c-target').value || 0, w = +$('#c-week').value || 0;
+  if (!t || !w){ $('#c-out').textContent = '—'; return; }
+  const weeks = Math.ceil(t / w);
+  const months = Math.floor(weeks / 4.345);
+  const word = (n, f) => { const a = Math.abs(n)%100, b = a%10; return a>10&&a<20 ? f[2] : b>1&&b<5 ? f[1] : b===1 ? f[0] : f[2]; };
+  $('#c-out').textContent = `${weeks} ${word(weeks,['неделя','недели','недель'])}` + (months ? ` (≈ ${months} ${word(months,['месяц','месяца','месяцев'])})` : '');
+}
+['#c-target','#c-week'].forEach(s => $(s).addEventListener('input', goalCalc)); goalCalc();
+
+function rule(){
+  const v = +$('#r-in').value || 0;
+  $('#r-50').textContent = fmt(v*.5); $('#r-30').textContent = fmt(v*.3); $('#r-20').textContent = fmt(v*.2);
+}
+$('#r-in').addEventListener('input', rule); rule();
+
+/* ---------- quizzes ---------- */
+const QUIZZES = [
+  {id:'basics', title:'Основы денег', ico:'💡', color:'var(--violet)', desc:'Доходы, расходы, бюджет и инфляция.', qs:[
+    ['Что такое бюджет?', ['Деньги, которые дали родители','План доходов и расходов на определённый срок','Сумма на банковской карте','Список покупок'], 1, 'Бюджет — это план: сколько денег придёт и на что ты их потратишь.'],
+    ['Что такое инфляция?', ['Рост цен со временем','Скидка в магазине','Процент по вкладу','Налог на покупки'], 0, 'Из-за инфляции на ту же сумму со временем можно купить меньше.'],
+    ['Что из этого — доход?', ['Покупка наушников','Плата за проезд','Деньги за подработку','Подписка на музыку'], 2, 'Доход — это деньги, которые к тебе приходят.'],
+    ['У тебя 1 000 ₽. Траты: 400 ₽ еда, 300 ₽ кино. Сколько можно отложить?', ['100 ₽','200 ₽','300 ₽','700 ₽'], 2, '1000 − 400 − 300 = 300 ₽.'],
+    ['Что значит «заплатить себе первым»?', ['Купить себе подарок с каждой получки','Сразу отложить часть денег, а потом тратить','Сначала вернуть долги друзьям','Платить картой, а не наличными'], 1, 'Откладывай сразу — иначе к концу месяца «лишних» денег не останется.'],
+    ['Что такое финансовая подушка безопасности?', ['Деньги на непредвиденные случаи','Кредитная карта','Страховка телефона','Кошелёк с защитой'], 0, 'Подушка помогает, когда случается что-то неожиданное.']
+  ]},
+  {id:'bank', title:'Банки и карты', ico:'💳', color:'var(--teal)', desc:'Как работают карты, проценты, вклады и кредиты.', qs:[
+    ['Чем дебетовая карта отличается от кредитной?', ['Ничем','На дебетовой — твои деньги, на кредитной — деньги банка в долг','Дебетовая только для взрослых','Кредитной можно платить только в интернете'], 1, 'Кредитка — это заём. Его нужно вернуть, иногда с процентами.'],
+    ['Ты положил 10 000 ₽ на вклад под 10% годовых. Сколько будет через год?', ['10 100 ₽','10 010 ₽','11 000 ₽','20 000 ₽'], 2, '10% от 10 000 = 1 000 ₽. Итого 11 000 ₽.'],
+    ['Что такое процент по кредиту?', ['Подарок от банка','Плата за пользование чужими деньгами','Скидка на покупки','Бонусные баллы'], 1, 'Берёшь в долг — возвращаешь больше, чем взял.'],
+    ['Что такое кешбэк?', ['Возврат части потраченных денег','Комиссия банка','Снятие наличных','Штраф за просрочку'], 0, 'Кешбэк — возврат части суммы покупки, обычно небольшой процент.'],
+    ['С какого возраста в России можно получить свою банковскую карту (с согласия родителей)?', ['С 6 лет','С 14 лет','С 18 лет','С 21 года'], 1, 'С 14 лет можно оформить карту на себя с согласия родителей; до этого — детскую карту к счёту родителя.'],
+    ['Что такое сложный процент?', ['Процент, который сложно посчитать','Проценты начисляются и на сумму, и на прошлые проценты','Процент по кредиту','Банковская комиссия'], 1, 'Деньги «зарабатывают» на заработанном — со временем сумма растёт быстрее.']
+  ]},
+  {id:'safe', title:'Безопасность и мошенники', ico:'🛡️', color:'var(--red)', desc:'Как не потерять деньги в интернете и по телефону.', qs:[
+    ['Звонит «сотрудник банка» и просит код из СМС. Что делать?', ['Назвать код — он же из банка','Положить трубку и позвонить в банк по номеру с карты','Назвать только половину кода','Попросить перезвонить позже'], 1, 'Настоящий банк никогда не спрашивает коды. Это мошенники.'],
+    ['Какие данные карты нельзя сообщать никому?', ['Только имя','ПИН-код и CVC/CVV на обороте','Название банка','Цвет карты'], 1, 'ПИН и CVC знаешь только ты. Даже родственникам лучше не говорить.'],
+    ['В соцсети «друг» просит срочно перевести 2 000 ₽. Как поступить?', ['Перевести — друг же','Позвонить другу по телефону и уточнить','Перевести половину','Отправить данные карты'], 1, 'Аккаунты часто взламывают. Проверь лично, голосом.'],
+    ['Тебе пишут: «Вы выиграли iPhone! Оплатите доставку 500 ₽». Это…', ['Удача','Скорее всего мошенничество','Акция магазина','Подарок от блогера'], 1, 'Если ты не участвовал в розыгрыше — ты ничего не выигрывал.'],
+    ['Тебе предлагают «лёгкий заработок»: дать свою карту, чтобы через неё прошли чужие деньги. Это…', ['Нормальная подработка','Опасно: ты становишься дроппером и можешь попасть под уголовную ответственность','Выгодная сделка','Помощь другу'], 1, 'Дропперы помогают мошенникам выводить деньги. Это незаконно, даже для подростков.'],
+    ['Как понять, что сайт для оплаты безопасный?', ['На нём много рекламы','Адрес начинается с https и это официальный сайт магазина','На сайте яркий дизайн','Там очень низкие цены'], 1, 'Проверяй адрес сайта. Подозрительно низкие цены — повод насторожиться.']
+  ]},
+  {id:'money', title:'Умные траты', ico:'🛍️', color:'#3f1e85', desc:'Желания и потребности, скидки и подписки.', qs:[
+    ['Что из этого — потребность, а не желание?', ['Новый скин в игре','Зимняя куртка, когда старая мала','Третья пара кроссовок','Лимитированный мерч'], 1, 'Потребность — то, без чего сложно обойтись.'],
+    ['Вещь стоила 2 000 ₽, теперь скидка 30%. Новая цена?', ['600 ₽','1 300 ₽','1 400 ₽','1 700 ₽'], 2, '30% от 2 000 = 600 ₽. 2000 − 600 = 1 400 ₽.'],
+    ['Что такое импульсивная покупка?', ['Покупка по списку','Спонтанная покупка «на эмоциях»','Покупка со скидкой','Покупка в рассрочку'], 1, 'Импульсивные покупки — главный «вор» карманных денег.'],
+    ['Подписка 199 ₽ в месяц. Сколько это за год?', ['199 ₽','1 990 ₽','2 388 ₽','3 000 ₽'], 2, '199 × 12 = 2 388 ₽. Мелкие регулярные платежи складываются.'],
+    ['Пачка 500 г стоит 120 ₽, пачка 1 кг — 220 ₽. Что выгоднее?', ['500 г','1 кг','Одинаково','Нельзя сказать'], 1, '1 кг по 220 ₽ = 110 ₽ за 500 г — дешевле, если ты всё используешь.'],
+    ['Что такое «правило 24 часов»?', ['Магазин работает круглосуточно','Подождать сутки перед необязательной покупкой','Вернуть товар в течение суток','Тратить деньги в течение дня'], 1, 'Пауза помогает понять, действительно ли вещь нужна.']
+  ]},
+  {id:'job', title:'Первая работа и зарплата', ico:'💼', color:'#14657a', desc:'Подработка, договор, налоги и честная зарплата.', qs:[
+    ['С какого возраста в России можно официально работать, если есть согласие родителей?', ['С 10 лет','С 14 лет','С 18 лет','С 21 года'], 1, 'С 14 лет можно выполнять лёгкую работу в свободное от учёбы время, с согласия родителя и при сокращённом рабочем дне.'],
+    ['Какой налог на доходы физических лиц (НДФЛ) обычно удерживают с зарплаты?', ['0%','5%','13%','50%'], 2, 'Для большинства зарплат ставка НДФЛ — 13%. Её удерживает работодатель до выплаты.'],
+    ['Тебе обещают зарплату 20 000 ₽ до вычета налога 13%. Сколько ты получишь на руки?', ['20 000 ₽','17 400 ₽','18 700 ₽','13 000 ₽'], 1, '13% от 20 000 = 2 600 ₽. 20 000 − 2 600 = 17 400 ₽.'],
+    ['Зачем нужен трудовой договор?', ['Это лишняя бумажка','Он защищает права: зарплату, отпуск, больничный','Только чтобы платить меньше налогов','Он нужен только начальнику'], 1, 'Договор фиксирует, сколько и за что тебе платят. Без него сложно что-то доказать.'],
+    ['Что плохого в «зарплате в конверте»?', ['Ничего, так даже удобнее','Нет защиты прав, не идёт стаж и пенсионные отчисления, можно не получить деньги','Её больше облагают налогом','Её выдают только наличными'], 1, 'Неофициальная зарплата — это риск: работодатель может не заплатить, а пожаловаться будет сложно.'],
+    ['Работодатель просит заплатить 2 000 ₽ «за обучение», прежде чем взять на работу. Это…', ['Нормальная практика','Частая схема обмана соискателей','Налог на работу','Залог за униформу, его всегда вернут'], 1, 'Честный работодатель платит тебе, а не ты ему. Требование денег заранее — тревожный сигнал.']
+  ]},
+  {id:'invest', title:'Инвестиции и риски', ico:'📈', color:'#5B2DB0', desc:'Акции, облигации, риск и доходность.', qs:[
+    ['Что такое акция?', ['Скидка в магазине','Доля в компании','Долг государства','Вид банковской карты'], 1, 'Купив акцию, ты становишься совладельцем маленькой части компании.'],
+    ['Что такое облигация?', ['Доля в компании','Долговая бумага: ты даёшь деньги в долг компании или государству под процент','Лотерейный билет','Страховка'], 1, 'Облигация — это заём. Эмитент обещает вернуть деньги и заплатить проценты.'],
+    ['Как обычно связаны доходность и риск?', ['Чем выше возможная доходность, тем выше риск','Высокая доходность — без риска','Они никак не связаны','Чем выше риск, тем ниже доходность всегда'], 0, 'Если обещают много, будь готов к тому, что можно и потерять. «Высокий доход без риска» — признак обмана.'],
+    ['Что значит «не класть все яйца в одну корзину»?', ['Покупать всё в одном магазине','Распределять деньги между разными вложениями (диверсификация)','Хранить деньги дома','Вкладывать в одну самую доходную компанию'], 1, 'Диверсификация снижает риск: если одно вложение упадёт, другие могут его компенсировать.'],
+    ['Что точно стоит сделать до инвестиций?', ['Взять кредит, чтобы вложить больше','Создать подушку безопасности и разобраться, во что вкладываешь','Вложить все накопления сразу','Слушать советы из случайных чатов'], 1, 'Инвестируют свободные деньги, которые не понадобятся срочно, и только в понятные инструменты.'],
+    ['Где проверить, есть ли у компании разрешение работать на финансовом рынке?', ['В комментариях в соцсетях','На сайте Банка России в справочнике участников финрынка','У блогера, который её рекламирует','Нигде, это нельзя проверить'], 1, 'Банк России ведёт открытый справочник лицензий. Нет в списке — повод насторожиться.']
+  ]},
+  {id:'credit', title:'Кредиты и долги', ico:'🧾', color:'#E8173A', desc:'Как работают кредиты, проценты и кредитная история.', qs:[
+    ['Что такое кредит?', ['Подарок от банка','Деньги в долг, которые нужно вернуть с процентами','Сбережения на вкладе','Бонусы за покупки'], 1, 'Кредит всегда нужно возвращать, причём больше, чем взял.'],
+    ['Что такое кредитная история?', ['История покупок в магазине','Информация о том, как человек брал и возвращал долги','Список банков в городе','Выписка по дебетовой карте'], 1, 'По кредитной истории банки решают, давать ли тебе кредит и под какой процент.'],
+    ['Что такое ПСК в кредитном договоре?', ['Первый срочный кредит','Полная стоимость кредита — сколько он реально стоит в год со всеми платежами','Пакет скидок клиента','Процент за снятие наличных'], 1, 'Смотри на ПСК, а не только на «ставку» в рекламе: в ПСК входят страховки и комиссии.'],
+    ['Что будет, если пропустить платёж по кредиту?', ['Ничего','Штрафы, пени и испорченная кредитная история','Банк простит долг','Платёж перенесут бесплатно'], 1, 'Просрочка делает кредит дороже и мешает получать кредиты в будущем.'],
+    ['Почему микрозаймы «до зарплаты» опасны?', ['Их сложно оформить','У них очень высокие ставки, долг быстро растёт','Их выдают только на покупку телефонов','Они бесплатные'], 1, 'Ставка в микрозайме может быть в разы выше, чем в банке. Небольшой долг легко превращается в большой.'],
+    ['Друг просит взять кредит на твоё имя для него. Как поступить?', ['Помочь, это же друг','Отказаться: платить по кредиту обязан тот, на кого он оформлен','Взять, но меньше','Согласиться, если друг даст расписку'], 1, 'Если друг не заплатит, долг и испорченная кредитная история останутся у тебя.']
+  ]},
+  {id:'rights', title:'Права покупателя', ico:'🛒', color:'#1F8BA0', desc:'Возврат, гарантия, чек и покупки онлайн.', qs:[
+    ['Сколько дней по закону есть, чтобы вернуть в магазин вещь надлежащего качества (например, не подошла футболка)?', ['3 дня','7 дней','14 дней, не считая дня покупки','30 дней'], 2, 'Закон о защите прав потребителей даёт 14 дней на обмен вещи надлежащего качества, если сохранены вид, ярлыки и чек.'],
+    ['Сколько дней есть на отказ от товара, купленного в интернете (если продавец правильно об этом сообщил)?', ['1 день','7 дней после получения','Нельзя вернуть','1 год'], 1, 'При дистанционной покупке можно отказаться от товара в течение 7 дней после получения.'],
+    ['Зачем сохранять чек?', ['Он не нужен','Он подтверждает покупку и помогает при возврате или ремонте','Только для коллекции','Чтобы получить скидку'], 1, 'Чек — главное доказательство покупки. Хотя вернуть можно и без него, если есть другие доказательства, например выписка по карте.'],
+    ['Новые наушники сломались через месяц. Что делать?', ['Выбросить и купить новые','Обратиться к продавцу по гарантии: ремонт, замена или возврат денег','Ничего нельзя сделать','Чинить самому'], 1, 'Если в течение гарантийного срока проявился брак, продавец обязан отремонтировать, заменить товар или вернуть деньги.'],
+    ['В магазине говорят: «Товар по акции возврату не подлежит». Это…', ['Всегда правда','Не так: скидка не лишает права вернуть бракованный товар','Закон об акциях','Правило только для одежды'], 1, 'Права покупателя действуют и на товары со скидкой. Если у вещи брак — её можно вернуть.'],
+    ['На кассе цена оказалась выше, чем на ценнике. Как поступить?', ['Заплатить и промолчать','Попросить продать по цене с ценника или отказаться от покупки','Устроить скандал','Сфотографировать кассира'], 1, 'Цена на ценнике — это предложение магазина. Вежливо попроси пересчитать по ней.']
+  ]}
+];
+function showQuizList(){
+  $('#quiz-run').hidden = true; $('#quiz-list').hidden = false;
+  $('#quiz-cards').innerHTML = QUIZZES.map(q => {
+    const best = state.quiz[q.id];
+    return `<div class="card quiz-card" data-quiz="${q.id}" tabindex="0">
+      <div class="page-ico" style="background:${q.color};width:56px;height:56px;font-size:28px;border-radius:16px">${q.ico}</div>
+      <h3 style="margin:6px 0 0">${q.title}</h3><p class="small">${q.desc}</p>
+      <div class="meta"><span class="chip">${q.qs.length} вопросов</span>${best!=null?`<span class="chip ok">Лучший: ${best}/${q.qs.length}</span>`:''}</div>
+      <button class="btn btn-sm btn-violet" style="align-self:start;margin-top:6px">${best!=null?'Пройти снова':'Начать тест'}</button>
+    </div>`;
+  }).join('');
+}
+$('#quiz-cards').addEventListener('click', e => { const c = e.target.closest('[data-quiz]'); if (c) startQuiz(c.dataset.quiz); });
+$('#quiz-cards').addEventListener('keydown', e => { const c = e.target.closest('[data-quiz]'); if (c && e.key === 'Enter') startQuiz(c.dataset.quiz); });
+
+let Q, qi, qScore;
+function startQuiz(id){
+  Q = QUIZZES.find(q => q.id === id); qi = 0; qScore = 0;
+  $('#quiz-list').hidden = true; $('#quiz-run').hidden = false;
+  renderQ(); window.scrollTo(0,0);
+}
+function renderQ(){
+  const [text, opts, right, expl] = Q.qs[qi];
+  $('#quiz-run').innerHTML = `
+    <button class="btn btn-sm btn-ghost" style="color:var(--violet)" id="q-back">← Все тесты</button>
+    <div class="card mt">
+      <div style="display:flex;justify-content:space-between;font-weight:700;font-size:14px;margin-bottom:8px"><span>${Q.ico} ${Q.title}</span><span class="muted">${qi+1} / ${Q.qs.length}</span></div>
+      <div class="progress"><i style="width:${qi/Q.qs.length*100}%"></i></div>
+      <div class="q-title">${text}</div>
+      ${opts.map((o,i) => `<button class="opt" data-o="${i}">${o}</button>`).join('')}
+      <div class="explain" id="q-ex"></div>
+      <button class="btn btn-red" id="q-next" hidden>${qi+1 < Q.qs.length ? 'Дальше →' : 'Результат'}</button>
+    </div>`;
+  $('#q-back').onclick = showQuizList;
+  $$('.opt').forEach(b => b.onclick = () => {
+    const i = +b.dataset.o, ok = i === right;
+    if (ok) qScore++;
+    $$('.opt').forEach((x,j) => { x.disabled = true; if (j === right) x.classList.add('right'); });
+    if (!ok) b.classList.add('wrong');
+    const ex = $('#q-ex'); ex.innerHTML = (ok ? '<b>Верно!</b> ' : '<b>Не совсем.</b> ') + expl; ex.classList.add('show');
+    ex.style.background = ok ? 'var(--mint-soft)' : 'var(--red-soft)';
+    $('#q-next').hidden = false;
+  });
+  $('#q-next').onclick = () => { qi++; qi < Q.qs.length ? renderQ() : resultQ(); };
+}
+function resultQ(){
+  const n = Q.qs.length, pct = qScore / n;
+  const prev = state.quiz[Q.id];
+  if (prev == null || qScore > prev){ state.quiz[Q.id] = qScore; save(); }
+  const [title, msg] = pct === 1 ? ['Финансовый гуру! 🏆','Ты отлично разбираешься в теме. Попробуй другие тесты.']
+    : pct >= .67 ? ['Хороший результат! 💪','Ты знаешь основы. Посмотри объяснения к ошибкам — и будет идеально.']
+    : pct >= .34 ? ['Неплохое начало 🌱','Есть что подтянуть. Загляни в разделы «Траты» и «Накопления».']
+    : ['Есть куда расти 🚀','Ничего страшного — для этого сайт и сделан. Попробуй ещё раз!'];
+  $('#quiz-run').innerHTML = `
+    <div class="card result">
+      <span class="eyebrow">${Q.title}</span>
+      <div class="score-ring" style="background:conic-gradient(var(--violet) ${pct*360}deg, var(--violet-soft) 0)"><span style="background:#fff;width:124px;height:124px;border-radius:50%;display:grid;place-items:center">${qScore}/${n}</span></div>
+      <h2>${title}</h2><p>${msg}</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px">
+        <button class="btn btn-red" id="q-again">Пройти ещё раз</button>
+        <button class="btn btn-ghost" style="color:var(--violet)" id="q-list">Другие тесты</button>
+      </div>
+    </div>`;
+  $('#q-again').onclick = () => startQuiz(Q.id);
+  $('#q-list').onclick = showQuizList;
+}
+
+/* ---------- detective ---------- */
+if (!state.cases) state.cases = {};
+const CASES = [
+  {id:'prize', no:'Дело №1', title:'Приз, которого не было', ico:'🎁', tag:'Мошенничество', level:'Легко',
+   story:'Маше (14 лет) в соцсети написали: «Поздравляем! Вы выиграли iPhone в нашем розыгрыше! Оплатите доставку 490 ₽ в течение часа, иначе приз уйдёт другому». Маша перевела деньги. Через день пришло новое сообщение: «Для получения приза оплатите налог 1 500 ₽». Телефона до сих пор нет.',
+   clues:[
+     ['📱','Аккаунт','Страница «Розыгрыш_Официальный_2026» создана неделю назад, у неё 12 подписчиков.'],
+     ['🎟️','Участие','Маша не подписывалась ни на какие розыгрыши и ничего не репостила.'],
+     ['⏰','Срочность','Требуют оплатить «в течение часа», иначе приз сгорит.'],
+     ['🔗','Ссылка','Оплата идёт по ссылке на странный сайт, а не через магазин или маркетплейс.']
+   ],
+   q1:['Что на самом деле произошло?', ['Маше просто не повезло с доставкой','Это мошенники с фальшивым розыгрышем','Это настоящий розыгрыш, просто нужно заплатить налог','Магазин перепутал адрес'], 1,
+       'Ты не можешь выиграть в розыгрыше, где не участвовал. Срочность и платежи «за доставку» и «налог» — классическая схема.'],
+   q2:['Что Маше делать сейчас?', ['Оплатить налог, чтобы наконец получить телефон','Перестать платить, рассказать родителям, пожаловаться на аккаунт и сообщить в банк о переводе','Удалить переписку и забыть','Отправить мошенникам данные карты, чтобы они вернули деньги'], 1,
+       'Каждый следующий платёж — это ещё больше потерь. Нужно остановиться, сохранить скриншоты, рассказать взрослым и сообщить в банк и соцсеть.'],
+   lesson:['Нельзя выиграть в розыгрыше, где ты не участвовал','Настоящие призы не требуют оплаты «доставки» или «налога»','Срочность — главный инструмент мошенников','Сохраняй скриншоты переписки: они пригодятся']},
+
+  {id:'bank', no:'Дело №2', title:'Звонок «из банка»', ico:'📞', tag:'Мошенничество', level:'Легко',
+   story:'Артёму позвонили в мессенджере: «Здравствуйте, служба безопасности банка. С вашей карты пытаются списать 5 000 ₽. Чтобы отменить операцию, продиктуйте код из СМС». Артём испугался и назвал код. Через минуту с карты списали все 3 000 ₽.',
+   clues:[
+     ['💬','Канал связи','Звонок пришёл через мессенджер, а не с официального номера банка.'],
+     ['✉️','Текст СМС','В сообщении с кодом было написано: «Никому не сообщайте этот код».'],
+     ['😰','Давление','Звонящий торопил: «Решайте быстрее, деньги уже списываются!»'],
+     ['🏦','Правила банка','На сайте банка написано: сотрудники никогда не спрашивают коды и ПИН.']
+   ],
+   q1:['Что произошло?', ['Банк ошибся и списал деньги','Артёма обманули телефонные мошенники','Это был настоящий сотрудник банка','Карту взломали хакеры без участия Артёма'], 1,
+       'Мошенники давят на страх и спешку. Код из СМС подтверждает операцию — отдав его, Артём сам разрешил списание.'],
+   q2:['Как правильно поступить теперь?', ['Перезвонить по номеру из мессенджера и попросить вернуть деньги','Сразу заблокировать карту в приложении или по номеру на обороте карты, рассказать родителям и написать заявление в банк','Подождать, вдруг деньги вернутся сами','Завести новую карту и никому не говорить'], 1,
+       'Чем быстрее заблокировать карту и сообщить в банк, тем больше шансов остановить мошенников. Звонить можно только по официальному номеру.'],
+   lesson:['Банк никогда не просит код из СМС, ПИН или CVC','Получил тревожный звонок — положи трубку и перезвони сам по номеру с карты','Спешка и страх — повод остановиться','Карту можно заблокировать в приложении за пару секунд']},
+
+  {id:'pyramid', no:'Дело №3', title:'+30% в неделю', ico:'📈', tag:'Неудачные вложения', level:'Средне',
+   story:'Блогер рассказал про «инвестиционный проект»: вкладываешь деньги — получаешь +30% каждую неделю, а за каждого приглашённого друга — бонус. Дима вложил 5 000 ₽ накоплений. Первую неделю ему выплатили 1 500 ₽, он позвал троих друзей. На третьей неделе сайт перестал открываться, а блогер удалил посты.',
+   clues:[
+     ['💸','Доходность','Обещали +30% в неделю. Обычный вклад в банке даёт столько примерно за несколько лет.'],
+     ['👥','Друзья','Главный способ заработать — приглашать новых участников.'],
+     ['📄','Документы','У «проекта» нет лицензии Банка России, нет адреса компании.'],
+     ['💰','Первые выплаты','Первым участникам действительно платили — из денег новых участников.']
+   ],
+   q1:['Что это было?', ['Обычные инвестиции, просто рынок упал','Финансовая пирамида','Банковский вклад','Ошибка сайта, деньги скоро вернутся'], 1,
+       'Пирамида платит старым участникам из денег новых. Когда новых становится мало — организаторы исчезают. Огромная «гарантированная» доходность — главный признак.'],
+   q2:['Что Диме стоит сделать?', ['Вложить ещё, чтобы «отыграться»','Пригласить ещё друзей, чтобы вернуть свои деньги','Сохранить доказательства, рассказать родителям, предупредить друзей и сообщить в полицию и Банк России','Ничего не делать и молчать, чтобы не было стыдно'], 2,
+       'Попытка «отыграться» или привести новых людей только увеличит потери — свои и чужие. Жалобы помогают остановить схему.'],
+   lesson:['Высокая гарантированная доходность = высокий риск обмана','Если зарабатывать нужно на приглашении друзей — это пирамида','Проверяй компанию в справочнике участников финрынка на сайте Банка России','Вкладывай только то, что готов потерять']},
+
+  {id:'dropper', no:'Дело №4', title:'Лёгкий заработок', ico:'💳', tag:'Мошенничество', level:'Средне',
+   story:'Лизе написали в Telegram: «Нужна помощь! Заработай 2 000 ₽ за 5 минут: тебе на карту придут деньги, а ты переведи их на другую карту. Остальное оставь себе». Лиза уже почти согласилась — ведь это «просто перевод».',
+   clues:[
+     ['🤑','Оплата','За 5 минут «работы» обещают 2 000 ₽ — подозрительно много.'],
+     ['❓','Источник денег','Откуда эти деньги и кому они принадлежат, не объясняют.'],
+     ['🙅','Анонимность','Заказчик не называет себя и просит удалить переписку после перевода.'],
+     ['⚖️','Закон','Такие «посредники» помогают мошенникам выводить украденные деньги.']
+   ],
+   q1:['Кем хотят сделать Лизу?', ['Курьером','Дроппером — человеком, через карту которого проводят украденные деньги','Фрилансером','Финансовым консультантом'], 1,
+       'Дропперы — важное звено мошеннических схем. Банк заблокирует карту, а за участие грозит ответственность — даже подросткам.'],
+   q2:['Как поступить Лизе?', ['Согласиться один раз — ничего страшного','Отказаться, не передавать данные карты, заблокировать собеседника и рассказать взрослым','Передать карту подруге, пусть она переводит','Согласиться, но попросить больше денег'], 1,
+       'Правильно — отказаться и сообщить взрослым. Если деньги уже пришли, нельзя их переводить: нужно сразу позвонить в банк.'],
+   lesson:['Никому не передавай свою карту и её данные','«Лёгкие деньги» за переводы — это схема мошенников','Участие в таких схемах незаконно','Если чужие деньги уже пришли — звони в банк, а не переводи дальше']},
+
+  {id:'subs', no:'Дело №5', title:'Куда исчезают деньги?', ico:'🔍', tag:'Неудачные траты', level:'Сложно',
+   story:'Егор каждый месяц получает 3 000 ₽ карманных денег. Он почти ничего не покупает, но к концу месяца на карте всегда на 800 ₽ меньше, чем он ожидал. Мошенников нет, карту никто не брал. Куда утекают деньги?',
+   clues:[
+     ['🎵','Выписка №1','Каждое 5-е число: «Музыка Плюс» — 299 ₽.'],
+     ['🎬','Выписка №2','Каждое 12-е число: «Кино онлайн» — 349 ₽. Полгода назад Егор оформил «пробный период за 1 ₽».'],
+     ['🎮','Выписка №3','Каждое 20-е число: «Игровой пропуск» — 169 ₽. В эту игру Егор не играет уже 3 месяца.'],
+     ['📝','Привычка','Егор не записывает траты и не смотрит выписку в приложении банка.']
+   ],
+   q1:['В чём причина?', ['Банк берёт скрытые комиссии','Забытые подписки, которые продлеваются автоматически','Егора обкрадывают мошенники','Деньги теряются при переводе'], 1,
+       '299 + 349 + 169 = 817 ₽ в месяц, почти 10 000 ₽ в год. Пробный период за 1 ₽ превращается в платную подписку, если её не отменить.'],
+   q2:['Что поможет Егору?', ['Попросить больше карманных денег','Проверить выписку, отменить ненужные подписки и ставить напоминание об окончании пробных периодов','Перестать пользоваться картой совсем','Ничего — это нормально'], 1,
+       'Отключив кино и игровой пропуск, Егор сэкономит 518 ₽ в месяц — это больше 6 000 ₽ в год на свою цель.'],
+   lesson:['Раз в месяц проверяй выписку по карте','Пробный период? Сразу поставь напоминание об отмене','Отключай подписки, которыми не пользуешься','Веди учёт трат — например, в разделе «Личный кошелёк»']}
+];
+
+function showCases(){
+  window.scrollTo(0,0);
+  $('#case-run').hidden = true; $('#case-list').hidden = false;
+  const solved = CASES.filter(c => state.cases[c.id] != null).length;
+  $('#case-count').textContent = `Раскрыто: ${solved} из ${CASES.length}`;
+  $('#case-cards').innerHTML = CASES.map(c => {
+    const r = state.cases[c.id];
+    return `<div class="card case-card" data-case="${c.id}" tabindex="0">
+      ${r!=null?`<span class="stamp">РАСКРЫТО</span>`:''}
+      <span class="case-no">${c.no}</span>
+      <div style="font-size:36px">${c.ico}</div>
+      <h3 style="margin:0">${c.title}</h3>
+      <p class="small">${c.story.slice(0,110)}…</p>
+      <div class="meta" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:auto"><span class="chip">${c.tag}</span><span class="chip" style="background:var(--red-soft);color:var(--red)">${c.level}</span>${r!=null?`<span class="chip ok">⭐ ${r} из 2</span>`:''}</div>
+      <button class="btn btn-sm btn-violet" style="align-self:start;margin-top:6px">${r!=null?'Расследовать снова':'Взять дело'}</button>
+    </div>`;
+  }).join('');
+}
+$('#case-cards').addEventListener('click', e => { const c = e.target.closest('[data-case]'); if (c) startCase(c.dataset.case); });
+$('#case-cards').addEventListener('keydown', e => { const c = e.target.closest('[data-case]'); if (c && e.key === 'Enter') startCase(c.dataset.case); });
+
+let C, cOpened, cScore;
+function startCase(id){
+  C = CASES.find(c => c.id === id); cOpened = new Set(); cScore = 0;
+  $('#case-list').hidden = true; $('#case-run').hidden = false;
+  renderCaseIntro(); window.scrollTo(0,0);
+}
+const caseSteps = n => `<div class="steps">${['1. Улики','2. Что произошло','3. Решение','4. Итог'].map((t,i)=>`<span class="${i===n?'on':i<n?'done':''}">${t}</span>`).join('')}</div>`;
+function caseHeader(){ return `<button class="btn btn-sm btn-ghost" style="color:var(--violet)" id="c-back">← Все дела</button>`; }
+function renderCaseIntro(){
+  const all = cOpened.size === C.clues.length;
+  $('#case-run').innerHTML = `${caseHeader()}
+    ${caseSteps(0)}
+    <div class="dossier mt">
+      <span class="case-no">${C.no} · ${C.tag}</span>
+      <h2 style="margin-top:6px">${C.ico} ${C.title}</h2>
+      <p>${C.story}</p>
+    </div>
+    <div class="card mt">
+      <h3>Улики</h3>
+      <p class="small">Нажми на каждую улику, чтобы изучить её. Открыто: <b>${cOpened.size} из ${C.clues.length}</b></p>
+      <div class="clues">${C.clues.map((c,i) => cOpened.has(i)
+        ? `<div class="clue open"><span class="ci">${c[0]}</span><b>${c[1]}</b><small>${c[2]}</small></div>`
+        : `<button class="clue" data-clue="${i}"><span class="ci">🔒</span><b>Улика ${i+1}</b><small>Нажми, чтобы открыть</small></button>`).join('')}</div>
+      <button class="btn btn-red mt" id="c-go" ${all?'':'disabled style="opacity:.45;cursor:not-allowed"'}>${all?'Перейти к расследованию →':'Сначала открой все улики'}</button>
+    </div>`;
+  $('#c-back').onclick = showCases;
+  $$('[data-clue]').forEach(b => b.onclick = () => { cOpened.add(+b.dataset.clue); renderCaseIntro(); });
+  if (all) $('#c-go').onclick = () => renderCaseQ(1);
+}
+function renderCaseQ(n){
+  window.scrollTo(0,0);
+  const [text, opts, right, expl] = n === 1 ? C.q1 : C.q2;
+  $('#case-run').innerHTML = `${caseHeader()}
+    ${caseSteps(n)}
+    <div class="card mt">
+      <span class="case-no">${C.no} · ${C.title}</span>
+      <div class="q-title">${n===1?'🔎':'🛠️'} ${text}</div>
+      ${opts.map((o,i) => `<button class="opt" data-o="${i}">${o}</button>`).join('')}
+      <div class="explain" id="q-ex"></div>
+      <button class="btn btn-red" id="c-next" hidden>${n===1?'Дальше: как решить →':'Закрыть дело'}</button>
+    </div>
+    <details class="card mt"><summary style="cursor:pointer;font-weight:800">📂 Посмотреть улики ещё раз</summary>
+      <div class="clues">${C.clues.map(c => `<div class="clue open"><span class="ci">${c[0]}</span><b>${c[1]}</b><small>${c[2]}</small></div>`).join('')}</div>
+    </details>`;
+  $('#c-back').onclick = showCases;
+  $$('#case-run .opt').forEach(b => b.onclick = () => {
+    const i = +b.dataset.o, ok = i === right;
+    if (ok) cScore++;
+    $$('#case-run .opt').forEach((x,j) => { x.disabled = true; if (j === right) x.classList.add('right'); });
+    if (!ok) b.classList.add('wrong');
+    const ex = $('#q-ex'); ex.innerHTML = (ok ? '<b>Верно, детектив!</b> ' : '<b>Не совсем.</b> ') + expl; ex.classList.add('show');
+    ex.style.background = ok ? 'var(--mint-soft)' : 'var(--red-soft)';
+    $('#c-next').hidden = false;
+  });
+  $('#c-next').onclick = () => n === 1 ? renderCaseQ(2) : renderCaseEnd();
+}
+function renderCaseEnd(){
+  window.scrollTo(0,0);
+  const prev = state.cases[C.id];
+  if (prev == null || cScore > prev){ state.cases[C.id] = cScore; save(); }
+  const [title, msg] = cScore === 2 ? ['Дело раскрыто! 🏆','Ты верно понял, что произошло, и нашёл правильное решение.']
+    : cScore === 1 ? ['Почти раскрыто 🔍','Половина ответов верна. Перечитай объяснения — и в следующий раз получится.']
+    : ['Дело осталось открытым 🕵️','Ничего страшного: лучше ошибиться здесь, чем в жизни. Попробуй ещё раз.'];
+  const next = CASES[(CASES.indexOf(C)+1) % CASES.length];
+  $('#case-run').innerHTML = `${caseHeader()}
+    ${caseSteps(3)}
+    <div class="card result mt">
+      <span class="eyebrow">${C.no} · ${C.title}</span>
+      <div style="font-size:48px;margin:10px 0">${cScore===2?'⭐⭐':cScore===1?'⭐☆':'☆☆'}</div>
+      <h2>${title}</h2><p>${msg}</p>
+    </div>
+    <div class="card mt">
+      <h3>📌 Выводы детектива</h3>
+      <ul class="lesson">${C.lesson.map(l => `<li>${l}</li>`).join('')}</ul>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
+        <button class="btn btn-red" id="c-next-case">Следующее дело: ${next.title} →</button>
+        <button class="btn btn-ghost" style="color:var(--violet)" id="c-list">Все дела</button>
+      </div>
+    </div>`;
+  $('#c-back').onclick = showCases;
+  $('#c-list').onclick = showCases;
+  $('#c-next-case').onclick = () => startCase(next.id);
+}
+
+/* ---------- career ---------- */
+const CAREER_Q = [
+  ['Сколько тебе лет?', [
+    ['13 или меньше', {age:13}], ['14–15', {age:14}], ['16–17', {age:16}]
+  ]],
+  ['Что тебе нравится делать больше всего?', [
+    ['Рисовать, снимать, придумывать', {creative:3}], ['Разбираться в гаджетах и компьютерах', {tech:3}],
+    ['Общаться и знакомиться с людьми', {people:3}], ['Двигаться, быть на улице', {active:3}]
+  ]],
+  ['С кем или с чем тебе приятнее проводить время?', [
+    ['С животными', {animals:4}], ['С детьми помладше', {kids:4}], ['За компьютером', {tech:2, online:1}], ['С друзьями и в компании', {people:2, active:1}]
+  ]],
+  ['Что у тебя получается лучше всего?', [
+    ['Объяснять и помогать разобраться', {kids:2, teach:3}], ['Делать красиво: дизайн, монтаж, поделки', {creative:3}],
+    ['Быть аккуратным и ответственным', {care:3, animals:1}], ['Быстро разбираться в приложениях', {tech:3}]
+  ]],
+  ['Где тебе удобнее работать?', [
+    ['Дома, онлайн', {online:3}], ['Рядом с домом', {nearby:3}], ['Неважно, могу ездить', {active:1, people:1}]
+  ]],
+  ['Сколько времени ты готов уделять?', [
+    ['Пару часов в выходные', {weekend:3}], ['Несколько часов в неделю после школы', {weekly:3}], ['Хочу поработать на каникулах', {summer:3}]
+  ]]
+];
+const JOBS = [
+  {t:'Выгул собак', e:'🐕', age:12, tags:{animals:3, active:2, nearby:2, weekly:1, care:1}, pay:'200–400 ₽ за прогулку', where:'Соседи, домовые чаты, знакомые', skill:'Ответственность и пунктуальность'},
+  {t:'Присмотр за питомцами', e:'🐈', age:12, tags:{animals:3, care:2, nearby:2, summer:1}, pay:'300–600 ₽ в день', where:'Соседи и знакомые, которые уезжают в отпуск', skill:'Забота и надёжность'},
+  {t:'Помощь младшим с уроками', e:'📚', age:14, tags:{teach:3, kids:2, online:1, nearby:1, weekly:2}, pay:'300–700 ₽ за занятие', where:'Знакомые родителей, школа, родительские чаты', skill:'Умение объяснять и терпение'},
+  {t:'Помощник аниматора на праздниках', e:'🎈', age:14, tags:{kids:3, people:2, creative:1, active:1, weekend:2}, pay:'500–1 500 ₽ за праздник', where:'Агентства праздников и детские центры', skill:'Публичные выступления и уверенность'},
+  {t:'Промоутер (раздача листовок)', e:'📣', age:14, tags:{people:3, active:2, weekend:1, summer:1}, pay:'200–350 ₽ в час', where:'Сайты вакансий с фильтром «для подростков»', skill:'Общение с незнакомыми людьми'},
+  {t:'Летняя трудовая бригада', e:'🌳', age:14, tags:{active:3, summer:3, nearby:1, people:1}, pay:'по договору с центром занятости', where:'Центр занятости в твоём районе, школа', skill:'Работа в команде, первый официальный стаж'},
+  {t:'Дизайн аватарок и обложек', e:'🎨', age:13, tags:{creative:3, online:3, tech:1, weekend:1}, pay:'300–1 000 ₽ за работу', where:'Знакомые блогеры, школьные проекты, своё портфолио', skill:'Дизайн и работа с заказчиком'},
+  {t:'Монтаж коротких видео', e:'🎬', age:14, tags:{creative:3, tech:2, online:3, weekly:1}, pay:'300–1 500 ₽ за ролик', where:'Знакомые блогеры, местные кафе и кружки', skill:'Монтаж и соблюдение сроков'},
+  {t:'Помощь пожилым с гаджетами', e:'📱', age:13, tags:{tech:3, people:2, teach:2, nearby:2, weekend:1}, pay:'200–500 ₽ за визит', where:'Соседи, знакомые бабушек и дедушек', skill:'Терпение и умение объяснять'},
+  {t:'Продажа своих поделок', e:'🧶', age:12, tags:{creative:3, weekend:2, online:1, care:1}, pay:'зависит от товара', where:'Школьные ярмарки, знакомые; онлайн — через родителей', skill:'Основы бизнеса: цена, себестоимость, продажи'},
+  {t:'Помощь в кафе или магазине', e:'☕', age:16, tags:{people:2, active:2, care:1, summer:2, weekly:1}, pay:'200–350 ₽ в час', where:'Кафе, кинотеатры, магазины рядом с домом', skill:'Работа в команде и с клиентами'},
+  {t:'Уборка снега, помощь на даче', e:'🧹', age:12, tags:{active:3, nearby:3, weekend:2, care:1}, pay:'300–800 ₽ за задачу', where:'Соседи, родственники, дачные чаты', skill:'Выносливость и трудолюбие'},
+  {t:'Вожатый-помощник в лагере', e:'⛺', age:16, tags:{kids:3, people:2, active:1, summer:3}, pay:'по договору с лагерем', where:'Детские лагеря и школьные летние площадки', skill:'Лидерство и ответственность за других'}
+];
+const TAG_WHY = {creative:'любишь творчество', tech:'разбираешься в технике', people:'любишь общаться', active:'любишь движение', animals:'ладишь с животными', kids:'ладишь с детьми', teach:'умеешь объяснять', care:'ответственный', online:'можно работать из дома', nearby:'рядом с домом', weekend:'подходит для выходных', weekly:'можно после школы', summer:'отлично для каникул'};
+
+let crI = 0, crAns = [];
+function showCareerIntro(){
+  window.scrollTo(0,0);
+  $('#career-box').innerHTML = `
+    <div class="card" style="text-align:center;padding:36px 24px">
+      <div style="font-size:56px">🧭</div>
+      <h2>Какая подработка подойдёт тебе?</h2>
+      <p style="max-width:520px;margin:0 auto">Ответь на ${CAREER_Q.length} коротких вопросов, и мы подберём варианты с учётом возраста, интересов и свободного времени.</p>
+      <button class="btn btn-red mt" id="cr-start">Начать →</button>
+    </div>`;
+  $('#cr-start').onclick = () => { crI = 0; crAns = []; renderCareerQ(); };
+}
+function renderCareerQ(){
+  const [text, opts] = CAREER_Q[crI];
+  $('#career-box').innerHTML = `
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;font-weight:700;font-size:14px;margin-bottom:8px"><span>🧭 Подбор подработки</span><span class="muted">${crI+1} / ${CAREER_Q.length}</span></div>
+      <div class="progress"><i style="width:${crI/CAREER_Q.length*100}%"></i></div>
+      <div class="q-title">${text}</div>
+      ${opts.map((o,i) => `<button class="opt" data-co="${i}">${o[0]}</button>`).join('')}
+      ${crI ? '<button class="btn btn-sm btn-ghost mt" style="color:var(--violet)" id="cr-prev">← Назад</button>' : ''}
+    </div>`;
+  $$('[data-co]').forEach(b => b.onclick = () => {
+    crAns[crI] = opts[+b.dataset.co][1];
+    crI++;
+    crI < CAREER_Q.length ? renderCareerQ() : renderCareerResult();
+  });
+  if (crI) $('#cr-prev').onclick = () => { crI--; renderCareerQ(); };
+}
+function renderCareerResult(){
+  window.scrollTo(0,0);
+  const prof = {}; let age = 14;
+  crAns.forEach(a => Object.entries(a).forEach(([k,v]) => { if (k === 'age') age = v; else prof[k] = (prof[k]||0) + v; }));
+  const ranked = JOBS.filter(j => j.age <= age).map(j => {
+    let s = 0; const why = [];
+    Object.entries(j.tags).forEach(([k,w]) => { if (prof[k]) { s += prof[k]*w; why.push([k, prof[k]*w]); } });
+    return {j, s, why: why.sort((a,b)=>b[1]-a[1]).slice(0,3).map(x => TAG_WHY[x[0]])};
+  }).sort((a,b) => b.s - a.s);
+  const top = ranked.slice(0,4), more = ranked.slice(4,7);
+  const ageNote = age <= 13
+    ? 'До 14 лет официально работать нельзя, кроме участия в творческих проектах (кино, театр, концерты). Зато можно помогать соседям и знакомым и учиться копить на свою цель.'
+    : age === 14
+    ? 'В 14–15 лет можно работать с письменного согласия родителя: не больше 4 часов в день на каникулах и 2,5 часа в день во время учёбы. Работа должна быть лёгкой и не мешать школе.'
+    : 'В 16–17 лет можно работать официально: не больше 7 часов в день на каникулах и 4 часа в день во время учёбы. Ночные смены и тяжёлая работа запрещены.';
+  state.career = top.map(x => x.j.t); save();
+  $('#career-box').innerHTML = `
+    <div class="card" style="background:var(--violet);color:#fff">
+      <span class="eyebrow" style="color:var(--mint)">Твой результат</span>
+      <h2 style="color:#fff">Тебе подойдёт</h2>
+      <p style="color:#e3dcf7">Мы подобрали варианты по твоим ответам. Начни с первого, а заработанное запиши в <a href="#wallet" style="color:var(--mint);font-weight:800">кошелёк</a>.</p>
+    </div>
+    <div class="grid g2 mt">${top.map((x,i) => `
+      <div class="card job">
+        <div style="display:flex;gap:14px;align-items:center"><span class="job-e">${x.j.e}</span><div><span class="case-no">${i===0?'ЛУЧШЕЕ СОВПАДЕНИЕ':'ВАРИАНТ '+(i+1)}</span><h3 style="margin:2px 0 0">${x.j.t}</h3></div></div>
+        ${x.why.length ? `<div class="nw" style="margin:4px 0">${x.why.map(w => `<span class="chip ok">${w}</span>`).join('')}</div>` : ''}
+        <div class="job-row"><span>💰 Примерный заработок</span><b>${x.j.pay}</b></div>
+        <div class="job-row"><span>🔎 Где искать</span><b>${x.j.where}</b></div>
+        <div class="job-row"><span>🚀 Что прокачаешь</span><b>${x.j.skill}</b></div>
+      </div>`).join('')}
+    </div>
+    ${more.length ? `<div class="card mt"><h3>Ещё можно попробовать</h3><div class="nw">${more.map(x => `<span class="chip">${x.j.e} ${x.j.t}</span>`).join('')}</div></div>` : ''}
+    <div class="card mt" style="border-left:6px solid var(--teal)"><h3>⚖️ Что говорит закон</h3><p>${ageNote}</p></div>
+    <div class="card mt" style="border-left:6px solid var(--red)">
+      <h3>🛡️ Правила безопасной подработки</h3>
+      <ul class="lesson">
+        <li>Всегда рассказывай родителям, где и на кого ты работаешь</li>
+        <li>Никогда не плати «за обучение», «за форму» или «за доступ к заданиям»</li>
+        <li>Не передавай свою карту и её данные: это может быть схема дропперов</li>
+        <li>Договаривайся об оплате заранее, лучше письменно</li>
+        <li>Встречайся с заказчиками только в людных местах или вместе со взрослым</li>
+      </ul>
+      <p class="small mt">Суммы указаны примерно и зависят от города. Проверь знания в тесте <a href="#tests" style="color:var(--violet);font-weight:800">«Первая работа и зарплата»</a>.</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
+      <button class="btn btn-red" id="cr-again">Пройти заново</button>
+      <a href="#detective" class="btn btn-ghost" style="color:var(--violet)">Дело «Лёгкий заработок» →</a>
+    </div>`;
+  $('#cr-again').onclick = () => { crI = 0; crAns = []; renderCareerQ(); };
+}
+
+/* ---------- init ---------- */
+renderWallet(); renderGoals(); route();
+})();
+</script>
+</body>
+</html>
